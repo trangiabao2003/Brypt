@@ -106,7 +106,7 @@ const Exchange = () => {
 						</div>
 						<input
 							className="w-full mb-2 p-3 rounded-xl bg-[#181c23]/80 text-white border border-[#31343c] focus:outline-none focus:ring-2 focus:ring-blue-400 transition font-mono"
-							placeholder="0x... (Token bạn muốn swap)"
+							placeholder="0x... (Address token want to swap)"
 							value={tokenIn}
 							onChange={(e) => setTokenIn(e.target.value)}
 						/>
@@ -136,7 +136,7 @@ const Exchange = () => {
 						</div>
 						<input
 							className="w-full mb-2 p-3 rounded-xl bg-[#181c23]/80 text-white border border-[#31343c] focus:outline-none focus:ring-2 focus:ring-pink-400 transition font-mono"
-							placeholder="0x... (Token muốn nhận)"
+							placeholder="0x... (Adress token want to receive)"
 							value={tokenOut}
 							onChange={(e) => setTokenOut(e.target.value)}
 						/>
@@ -148,7 +148,7 @@ const Exchange = () => {
 						</label>
 						<input
 							className="w-full p-3 rounded-xl bg-[#181c23]/80 text-white border border-[#31343c] focus:outline-none focus:ring-2 focus:ring-purple-400 transition font-mono"
-							placeholder="Số lượng muốn swap"
+							placeholder="Amount want to swap"
 							value={amountIn}
 							onChange={(e) => setAmountIn(e.target.value)}
 						/>

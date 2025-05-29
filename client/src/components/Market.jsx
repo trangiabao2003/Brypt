@@ -64,7 +64,7 @@ const Market = () => {
 					<div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-2">
 						{lastUpdate && (
 							<p className="text-gray-400 text-sm">
-								Cập nhật lúc: {lastUpdate.toLocaleTimeString()}
+								Last update: {lastUpdate.toLocaleTimeString()}
 							</p>
 						)}
 						<button
@@ -87,19 +87,19 @@ const Market = () => {
 											fill="none"
 										/>
 									</svg>
-									Đang làm mới...
+									Updating...
 								</span>
 							) : (
 								<>
 									<FaSyncAlt />
-									Làm mới
+									Refresh
 								</>
 							)}
 						</button>
 					</div>
 					{loading ? (
 						<p className="text-white text-center py-10 text-xl font-mono">
-							Đang tải dữ liệu...
+							Loading data...
 						</p>
 					) : (
 						<div className="overflow-x-auto rounded-2xl">
@@ -107,15 +107,15 @@ const Market = () => {
 								<thead>
 									<tr className="bg-gradient-to-r from-blue-700 via-purple-700 to-pink-700 text-white">
 										<th className="py-3 px-2 text-left rounded-tl-2xl">#</th>
-										<th className="py-3 px-2 text-left">Tiền ảo</th>
-										<th className="py-3 px-2 text-right">Giá</th>
+										<th className="py-3 px-2 text-left">Coin</th>
+										<th className="py-3 px-2 text-right">Price</th>
 										<th className="py-3 px-2 text-right">1h</th>
 										<th className="py-3 px-2 text-right">24h</th>
-										<th className="py-3 px-2 text-right">7n</th>
-										<th className="py-3 px-2 text-right">Khối lượng 24h</th>
-										<th className="py-3 px-2 text-right">Vốn hóa</th>
+										<th className="py-3 px-2 text-right">7d</th>
+										<th className="py-3 px-2 text-right">24h Trading volume</th>
+										<th className="py-3 px-2 text-right">Capitalization</th>
 										<th className="py-3 px-2 text-right rounded-tr-2xl">
-											7 ngày qua
+											Last 7 days
 										</th>
 									</tr>
 								</thead>
