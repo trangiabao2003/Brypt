@@ -23,16 +23,16 @@ const WalletHistory = () => {
 				<div className="relative z-10 bg-[#23272f]/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-[#31343c]">
 					<h2 className="text-white text-3xl font-extrabold mb-8 text-center tracking-wide drop-shadow-lg">
 						<span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-							Lịch sử giao dịch của bạn
+							Your transaction history
 						</span>
 					</h2>
 					{!currentAccount ? (
 						<p className="text-gray-400 text-center py-8 text-lg">
-							Vui lòng kết nối ví để xem lịch sử giao dịch.
+							Please connect your wallet to view transaction history.
 						</p>
 					) : filtered.length === 0 ? (
 						<p className="text-gray-400 text-center py-8 text-lg">
-							Không có giao dịch nào liên quan đến ví này.
+							There are no transactions associated with this wallet.
 						</p>
 					) : (
 						<div className="overflow-x-auto">
