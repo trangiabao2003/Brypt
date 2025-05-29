@@ -6,6 +6,7 @@ import {
 	Services,
 	Market,
 	WalletHistory,
+	Exchange,
 } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { TransactionsProvider } from "./context/TransactionContext";
@@ -30,6 +31,7 @@ const App = () => {
 							<Route path="/" element={<Welcome />} />
 							<Route path="/market" element={<Market />} />
 							<Route path="/wallet" element={<WalletHistory />} />
+							<Route path="/exchange" element={<Exchange />} />
 						</Routes>
 					</div>
 					<Services />

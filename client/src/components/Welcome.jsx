@@ -2,13 +2,9 @@ import React, { useContext } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
-
 import { TransactionContext } from "../context/TransactionContext";
 import { shortenAddress } from "../utils/shortenAddress";
 import { Loader } from ".";
-
-const companyCommonStyles =
-	"min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
 
 const Input = ({ placeholder, name, type, value, handleChange }) => (
 	<input
@@ -17,7 +13,7 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 		step="0.0001"
 		value={value}
 		onChange={(e) => handleChange(e, name)}
-		className="my-2 w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism"
+		className="my-2 w-full rounded-xl p-3 outline-none bg-[#181c23]/80 text-white border border-[#31343c] focus:outline-none focus:ring-2 focus:ring-blue-400 font-mono transition"
 	/>
 );
 
@@ -33,115 +29,135 @@ const Welcome = () => {
 
 	const handleSubmit = (e) => {
 		const { addressTo, amount, keyword, message } = formData;
-
 		e.preventDefault();
-
 		if (!addressTo || !amount || !keyword || !message) return;
-
 		sendTransaction();
 	};
 
 	return (
-		<div className="flex w-full justify-center items-center">
-			<div className="flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4">
+		<div className="flex w-full justify-center items-center min-h-screen bg-gradient-to-br from-[#181818] via-[#23272f] to-[#181818] relative">
+			{/* Animated border gradient */}
+			<div className="absolute inset-0 rounded-3xl blur-[2px] z-0 animate-gradient-x bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-blue-500 via-purple-500 to-pink-500 opacity-60"></div>
+			<div className="flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4 relative z-10 w-full max-w-7xl">
+				{/* Left */}
 				<div className="flex flex-1 justify-start items-start flex-col mf:mr-10">
-					<h1 className="text-3xl sm:text-5xl text-white text-gradient py-1">
-						Send Crypto <br /> across the world
+					<h1 className="text-4xl sm:text-6xl text-white font-extrabold mb-4 drop-shadow-lg">
+						<span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+							Send Crypto <br /> across the world
+						</span>
 					</h1>
-					<p className="text-left mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
-						Explore the crypto world. Buy and sell cryptocurrencies easily on
-						Krypto.
+					<p className="text-left mt-5 text-gray-200 font-light md:w-9/12 w-11/12 text-lg">
+						Khám phá thế giới crypto. Giao dịch coin nhanh chóng, an toàn, phí
+						thấp cùng <span className="font-bold text-blue-400">Brypt</span>.
 					</p>
 					{!currentAccount && (
 						<button
 							type="button"
 							onClick={connectWallet}
-							className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]">
-							<AiFillPlayCircle className="text-white mr-2" />
-							<p className="text-white text-base font-semibold">
-								Connect Wallet
-							</p>
+							className="flex flex-row justify-center items-center my-7 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-3 rounded-full cursor-pointer hover:scale-105 transition shadow-xl">
+							<AiFillPlayCircle className="text-white mr-2" size={24} />
+							<p className="text-white text-lg font-bold">Kết nối ví</p>
 						</button>
 					)}
 
-					<div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
-						<div className={`rounded-tl-2xl ${companyCommonStyles}`}>
-							Reliability
+					<div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10 gap-2">
+						<div className="rounded-2xl bg-gradient-to-br from-blue-500/30 to-blue-900/10 border border-blue-400/40 p-4 flex flex-col items-center shadow">
+							<span className="text-white font-bold text-lg">Reliability</span>
 						</div>
-						<div className={companyCommonStyles}>Security</div>
-						<div className={`sm:rounded-tr-2xl ${companyCommonStyles}`}>
-							Ethereum
+						<div className="rounded-2xl bg-gradient-to-br from-purple-500/30 to-purple-900/10 border border-purple-400/40 p-4 flex flex-col items-center shadow">
+							<span className="text-white font-bold text-lg">Security</span>
 						</div>
-						<div className={`sm:rounded-bl-2xl ${companyCommonStyles}`}>
-							Web 3.0
+						<div className="rounded-2xl bg-gradient-to-br from-pink-500/30 to-pink-900/10 border border-pink-400/40 p-4 flex flex-col items-center shadow">
+							<span className="text-white font-bold text-lg">Ethereum</span>
 						</div>
-						<div className={companyCommonStyles}>Low Fees</div>
-						<div className={`rounded-br-2xl ${companyCommonStyles}`}>
-							Blockchain
+						<div className="rounded-2xl bg-gradient-to-br from-blue-400/30 to-blue-900/10 border border-blue-400/40 p-4 flex flex-col items-center shadow">
+							<span className="text-white font-bold text-lg">Web 3.0</span>
+						</div>
+						<div className="rounded-2xl bg-gradient-to-br from-purple-400/30 to-purple-900/10 border border-purple-400/40 p-4 flex flex-col items-center shadow">
+							<span className="text-white font-bold text-lg">Low Fees</span>
+						</div>
+						<div className="rounded-2xl bg-gradient-to-br from-pink-400/30 to-pink-900/10 border border-pink-400/40 p-4 flex flex-col items-center shadow">
+							<span className="text-white font-bold text-lg">Blockchain</span>
 						</div>
 					</div>
 				</div>
-
+				{/* Right */}
 				<div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
-					<div className="p-3 flex justify-end items-start flex-col rounded-xl h-40 sm:w-72 w-full my-5 eth-card .white-glassmorphism ">
-						<div className="flex justify-between flex-col w-full h-full">
+					{/* Ethereum Card */}
+					<div className="relative p-1 mb-6 w-full max-w-xs mx-auto rounded-3xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 shadow-2xl animate-gradient-x">
+						<div className="bg-[#23272f]/90 backdrop-blur-xl rounded-3xl p-6 h-44 flex flex-col justify-between">
 							<div className="flex justify-between items-start">
-								<div className="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center">
-									<SiEthereum fontSize={21} color="#fff" />
+								<div className="w-12 h-12 rounded-full border-2 border-white flex justify-center items-center bg-gradient-to-br from-blue-500 to-purple-500 shadow-lg">
+									<SiEthereum fontSize={28} color="#fff" />
 								</div>
-								<BsInfoCircle fontSize={17} color="#fff" />
+								<BsInfoCircle
+									fontSize={20}
+									color="#fff"
+									className="opacity-80"
+								/>
 							</div>
 							<div>
-								<p className="text-white font-light text-sm">
-									{shortenAddress(currentAccount)}
+								<p className="text-white font-mono font-light text-base">
+									{currentAccount ? shortenAddress(currentAccount) : "0x..."}
 								</p>
-								<p className="text-white font-semibold text-lg mt-1">
+								<p className="text-white font-bold text-xl mt-1 tracking-wide">
 									Ethereum
 								</p>
 							</div>
 						</div>
 					</div>
-					<div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism">
+					{/* Send Form */}
+					<div className="p-6 w-full max-w-xs flex flex-col justify-start items-center bg-[#23272f]/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-[#31343c]">
 						<Input
-							placeholder="Address To"
+							placeholder="Địa chỉ nhận (Address To)"
 							name="addressTo"
 							type="text"
 							handleChange={handleChange}
 						/>
 						<Input
-							placeholder="Amount (ETH)"
+							placeholder="Số lượng (ETH)"
 							name="amount"
 							type="number"
 							handleChange={handleChange}
 						/>
 						<Input
-							placeholder="Keyword (Gif)"
+							placeholder="Từ khóa (Gif)"
 							name="keyword"
 							type="text"
 							handleChange={handleChange}
 						/>
 						<Input
-							placeholder="Enter Message"
+							placeholder="Lời nhắn"
 							name="message"
 							type="text"
 							handleChange={handleChange}
 						/>
-
-						<div className="h-[1px] w-full bg-gray-400 my-2" />
-
+						<div className="h-[1px] w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 my-3" />
 						{isLoading ? (
 							<Loader />
 						) : (
 							<button
 								type="button"
 								onClick={handleSubmit}
-								className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer">
-								Send now
+								className="w-full mt-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-bold py-3 rounded-2xl shadow-lg hover:scale-105 transition-all duration-200">
+								Gửi ngay
 							</button>
 						)}
 					</div>
 				</div>
 			</div>
+			<style>
+				{`
+                @keyframes gradient-x {
+                    0%, 100% {background-position: 0% 50%;}
+                    50% {background-position: 100% 50%;}
+                }
+                .animate-gradient-x {
+                    background-size: 200% 200%;
+                    animation: gradient-x 6s ease-in-out infinite;
+                }
+                `}
+			</style>
 		</div>
 	);
 };

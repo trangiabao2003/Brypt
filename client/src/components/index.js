@@ -10,3 +10,5 @@ export { default as Market } from "./Market";
 
 //history
 export { default as WalletHistory } from "./WalletHistory";
+
+export { default as Exchange } from "./Exchange";

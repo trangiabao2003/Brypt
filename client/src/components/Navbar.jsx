@@ -1,75 +1,107 @@
 import React from "react";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
-
 import logo from "../../images/logo.png";
-//route
-import { Link } from "react-router-dom";
-const NavBarItem = ({ title, classprops }) => {
-	return <li className={`mx-4 cursor-pointer ${classprops}`}>{title}</li>;
-};
+import { Link, useLocation } from "react-router-dom";
+
+const navItems = [
+	{ title: "Home", path: "/" },
+	{ title: "Market", path: "/market" },
+	{ title: "Wallet", path: "/wallet" },
+	{ title: "Exchange", path: "/exchange" },
+];
+
 const Navbar = () => {
 	const [toggleMenu, setToggleMenu] = React.useState(false);
+	const location = useLocation();
+
 	return (
-		<nav className="w-full flex md:justify-center justify-between items-center p-4">
-			<div className="md:flex-[0.5] flex-initial justify-center items-center">
-				<img src={logo} alt="logo" className="w-32 cursor-pointer" />
+		<nav className="w-full flex md:justify-center justify-between items-center px-4 py-3 bg-[#181c23]/70 backdrop-blur-xl shadow-lg border-b border-[#23272f] relative z-50">
+			{/* Logo */}
+			<div className="md:flex-[0.5] flex-initial flex items-center gap-2">
+				<img
+					src={logo}
+					alt="logo"
+					className="w-32 h-auto cursor-pointer drop-shadow-lg"
+				/>
+				<span className="hidden md:inline-block text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text font-extrabold text-2xl tracking-wide ml-2 select-none">
+					Brypt
+				</span>
 			</div>
+			{/* Desktop Menu */}
 			<ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
-				<li className="mx-4 cursor-pointer text-white">
-					<Link to="/">Home</Link>
-				</li>
-				<li className="mx-4 cursor-pointer text-white">
-					<Link to="/market">Market</Link>
-				</li>
-				<li className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]">
-					<Link to="/wallet">Wallet</Link>
-				</li>
-				{["Exchange", "Tutorials"].map((item, index) => (
-					<NavBarItem key={item + index} title={item} />
+				{navItems.map((item) => (
+					<li key={item.title} className="mx-3">
+						<Link
+							to={item.path}
+							className={`px-4 py-2 rounded-xl font-semibold transition-all duration-200 ${
+								location.pathname === item.path
+									? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white shadow-lg"
+									: "hover:bg-gradient-to-r hover:from-blue-700 hover:to-pink-700 hover:text-white"
+							}`}>
+							{item.title}
+						</Link>
+					</li>
 				))}
-				{/* <li className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]">
-					Login
-				</li> */}
 			</ul>
-			<div className="flex relative">
-				{!toggleMenu && (
+			{/* Mobile Menu Button */}
+			<div className="flex md:hidden">
+				{!toggleMenu ? (
 					<HiMenuAlt4
 						fontSize={28}
-						className="text-white md:hidden cursor-pointer"
+						className="text-white cursor-pointer transition hover:scale-110"
 						onClick={() => setToggleMenu(true)}
 					/>
-				)}
-				{toggleMenu && (
+				) : (
 					<AiOutlineClose
 						fontSize={28}
-						className="text-white md:hidden cursor-pointer"
+						className="text-white cursor-pointer transition hover:scale-110"
 						onClick={() => setToggleMenu(false)}
 					/>
 				)}
-				{toggleMenu && (
-					<ul
-						className="z-10 fixed -top-0 -right-2 p-3 w-[70vw] h-screen shadow-2xl md:hidden list-none
-            flex flex-col justify-start items-end rounded-md blue-glassmorphism text-white animate-slide-in">
-						<li className="text-xl w-full my-2">
-							<AiOutlineClose onClick={() => setToggleMenu(false)} />
-						</li>
-						{["Exchange", "Tutorials"].map((item, index) => (
-							<NavBarItem
-								key={item + index}
-								title={item}
-								classprops="my-2 text-lg"
-							/>
-						))}
-						<li className="bg-[#2952e3] py-2 px-7 my-2 rounded-full cursor-pointer hover:bg-[#2546bd] text-lg">
-							<Link to="/wallet" onClick={() => setToggleMenu(false)}>
-								Wallet
-							</Link>
-						</li>
-					</ul>
-				)}
 			</div>
+			{/* Mobile Menu */}
+			{toggleMenu && (
+				<div className="fixed top-0 right-0 w-[75vw] max-w-xs h-screen bg-[#23272f]/95 backdrop-blur-xl shadow-2xl z-50 animate-slide-in flex flex-col">
+					<div className="flex justify-between items-center px-6 py-4 border-b border-[#31343c]">
+						<img src={logo} alt="logo" className="w-24 h-auto" />
+						<AiOutlineClose
+							fontSize={28}
+							className="text-white cursor-pointer"
+							onClick={() => setToggleMenu(false)}
+						/>
+					</div>
+					<ul className="flex flex-col gap-2 mt-6 px-6">
+						{navItems.map((item) => (
+							<li key={item.title}>
+								<Link
+									to={item.path}
+									className={`block px-4 py-3 rounded-xl font-semibold text-lg transition-all duration-200 ${
+										location.pathname === item.path
+											? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white shadow-lg"
+											: "hover:bg-gradient-to-r hover:from-blue-700 hover:to-pink-700 hover:text-white"
+									}`}
+									onClick={() => setToggleMenu(false)}>
+									{item.title}
+								</Link>
+							</li>
+						))}
+					</ul>
+				</div>
+			)}
+			<style>
+				{`
+                @keyframes slide-in {
+                    0% { transform: translateX(100%);}
+                    100% { transform: translateX(0);}
+                }
+                .animate-slide-in {
+                    animation: slide-in 0.3s cubic-bezier(0.4,0,0.2,1);
+                }
+                `}
+			</style>
 		</nav>
 	);
 };
+
 export default Navbar;
