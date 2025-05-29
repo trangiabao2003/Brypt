@@ -178,7 +178,7 @@ const Exchange = () => {
 										fill="none"
 									/>
 								</svg>
-								Đang swap...
+								Swapping...
 							</span>
 						) : (
 							<span className="flex items-center justify-center gap-2">
