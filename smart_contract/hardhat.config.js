@@ -7,9 +7,7 @@ module.exports = {
 	networks: {
 		sepolia: {
 			url: INFURA_API_ENDPOINT,
-			accounts: [
-				PRIVATE_KEY
-			],
+			accounts: [PRIVATE_KEY],
 		},
 	},
 };
